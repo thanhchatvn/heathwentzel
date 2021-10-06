@@ -1,0 +1,96 @@
+<odoo>
+    <record id="inherit_invoice_form_mediswitch_1" model="ir.ui.view">
+        <field name="name">Customer Invoice</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+        <field name="team_id" position="after">
+            <field name="medical_aid_pay" invisible="1"/>
+            <field name="user_ref" invisible="1"/>
+            <field name="authorization_code" />
+        </field>
+<!--        <button name="action_invoice_open" position="attributes">-->
+<!--            <attribute name="attrs">{'invisible':['|',('medical_aid_pay','=',True)]}-->
+<!--            </attribute>-->
+<!--        </button>-->
+        <button name="action_invoice_open" position="after">
+            <button name="action_submit_claim" type="object" string="Submit Claim"
+                    attrs="{'invisible':['|',('claim_level_mediswitch_status','in',['01','02']),'|',('medical_aid_pay','=',False),'&amp;',('medical_aid_pay','=',True),('state','=','draft')]}"
+                    class="oe_highlight"/>
+            <button name="action_reverse_claim" type="object" string="Reverse Claim"
+                    attrs="{'invisible':['|',('medical_aid_pay','=',False),'|',('claim_level_mediswitch_status','in',['01','02','06']),'|',('approved_amount','=',0),'&amp;',('medical_aid_pay','=',True),('state','=','draft')]}"
+                    class="oe_highlight"/>
+
+            <button name="action_benefit_check" type="object" string="Benefit Check"
+                    attrs="{'invisible':[('medical_aid_pay','=',False),('state','!=','draft')]}"
+                    class="oe_highlight"/>
+        </button>
+<!--        <button id="account_invoice_payment_btn" position="attributes">-->
+<!--                <attribute name="attrs">{'invisible': [('medical_aid_pay','=',True)]}</attribute>-->
+<!--            </button>-->
+<!--            <xpath expr="//page[@string='Contacts']" position="attributes">-->
+<!--            <attribute name="attrs">{}</attribute>-->
+<!--        </xpath>-->
+            <field name="date_invoice" position="replace">
+                <field name="date_invoice"/>
+            </field>
+            <field name="date_invoice" position="before">
+                <field name="claim_level_mediswitch_status" readonly="1" attrs="{'invisible':[('medical_aid_pay',   '=',False)]}"/>
+                <field name="responding_party" readonly="1"/>
+                <field name="response_description" readonly="1"></field>
+                <field name="general_comments" readonly="1"></field>
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page string="Mediswitch Claims/Benefits">
+                    <field name="medical_aid_claims_lines">
+                         <tree >
+                             <field name="mediswitch_type"/>
+                            <field name="invoice_id"/>
+                            <field name="destination_code"/>
+                            <field name="user_reference"/>
+                            <field name="response_payload_date"/>
+                            <field name="status"/>
+                            <field name="switch_reference"/>
+                            <field name="retry"/>
+                            <field name="response_payload" groups="base.group_no_one"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <field name="comment" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+            </field>
+    </record>
+
+    <record id="HUMINT_account_invoice_tree_with_onboarding" model="ir.ui.view">
+        <field name="name">Customer Invoice</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="claim_level_mediswitch_status"></field>
+                <field name="payment_term_id"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="action_partner_msv1" model="ir.actions.act_window">
+        <field name="name">Msv's</field>
+        <field name="res_model">msv.response</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <record id="action_partner_bulk_msv" model="ir.actions.act_window">
+        <field name="name">Bulk MSV</field>
+        <field name="res_model">bulk.msv</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="clinical_msv" name="MSV History" parent="TOMS.clinical_customer" sequence="2" action="action_partner_msv1"/>
+    <menuitem id="bulk_msv" name="Send Bulk MSV" parent="TOMS.clinical_customer" sequence="3" action="action_partner_bulk_msv"/>
+
+
+</odoo>

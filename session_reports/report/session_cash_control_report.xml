@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_cash_control_report">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <span>
+                                <b>Report Name:</b>Day-End Cash-Up Report -User
+                            </span>
+                            <table class="table table-sm o_main_table" style="border: 1px solid #dddddd;">
+                                <tr>
+                                    <td>
+                                        <strong>Printing User</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="user.name"/>
+                                    </td>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Session User</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.user_id"/>
+                                    </td>
+                                    <td>
+                                        <strong>Session Store</strong>
+                                    </td>
+                                    <!-- <td>
+                                        <span t-field="doc.store_id"/>
+                                    </td> -->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Session Start</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.opening_date"/>
+                                    </td>
+                                    <td>
+                                        <strong>Session End</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.closing_date"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Session ID</td>
+                                    <td><span t-field="doc.session_id"/></td>
+                                    <td>
+                                        <strong>Verified Sign :</strong>
+                                    </td>
+                                    <td>
+                                        <span></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Opening Cash Float</strong>
+                                    </td>
+                                    <td>
+                                        R
+                                        <span t-field="doc.starting_cash"/>
+                                    </td>
+                                    <td>
+                                        <strong></strong>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong></strong>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <strong></strong>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <th>
+                                        <u>Tender Type</u>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+                                        <u>Pick-Ups</u>
+                                    </th>
+                                    <th>
+                                        <u>Calculated Amt</u>
+                                    </th>
+                                    <th>
+                                        <u>Counted</u>
+                                    </th>
+                                    <th>
+                                        <u>Varience</u>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>CASH</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <t t-set="cal_pickup"
+                                               t-value="((line.starting_cash + line.transaction - line.expected_cash))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_pickup"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.transaction"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_cash"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.difference"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>EFT</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <t t-set="cal_eft" t-value="(-(line.actual_eft + line.diff_eft))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_eft"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_eft"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_eft"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>DEBIT CARD</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <t t-set="cal_debit" t-value="(-(line.actual_debit + line.diff_debit))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_debit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_debit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_debit"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>CREDIT CARD</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <t t-set="cal_credit" t-value="(-(line.actual_credit + line.diff_credit))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_credit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_credit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_credit"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>NUPAY</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <t t-set="cal_nupay" t-value="(-(line.actual_nupay + line.diff_nupay))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_nupay"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_nupay"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_nupay"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>LOYALTY</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <t t-set="cal_loyalty"
+                                               t-value="(-(line.actual_loyalty + line.diff_loyalty))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_loyalty"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_loyalty"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_loyalty"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>VOUCHER</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <t t-set="cal_voucher"
+                                               t-value="(-(line.actual_voucher + line.diff_voucher))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_voucher"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_voucher"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_voucher"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>TOTAL PAYMENTS</b>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <b>
+                                                <t t-set="cal_total" t-value="(line.transaction +
+                                -(line.actual_nupay + line.diff_nupay) +
+                                -(line.actual_voucher + line.diff_voucher) +
+                                -(line.actual_loyalty + line.diff_loyalty)+
+                                -(line.actual_credit + line.diff_credit)+
+                                -(line.actual_debit + line.diff_debit)+
+                                -(line.actual_eft + line.diff_eft))"/>
+                                                <u>
+                                                    <b>R</b>
+                                                    <t t-esc="cal_total"/>
+                                                </u>
+                                            </b>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <span>
+                                <u>
+                                    <b>Cash Pickups:</b>
+                                </u>
+                            </span>
+                            <table class="table o_report_block_table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <span>Pickup Sequence #</span>
+                                        </th>
+                                        <th>
+                                            <span>Pickup ID</span>
+                                        </th>
+                                        <th>
+                                            <span>Date</span>
+                                        </th>
+                                        <th>
+                                            <span>Reason</span>
+                                        </th>
+                                        <th>
+                                            <span>Amount</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.out_money_ids" t-as="table_line">
+                                        <td></td>
+                                        <td>
+                                            <span t-field="table_line.id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="table_line.date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="table_line.reason"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="table_line.amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <span>
+                                    <u>
+                                        <b>Document Totals included in this Cashup Report</b>
+                                    </u>
+                                </span>
+                                <t t-set="order" t-value="order_data[doc.id]"/>
+                                <table class="text-right table">
+                                    <thead>
+                                        <tr>
+                                            <th>Document Type</th>
+                                            <th>Count</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Cash Sale</td>
+                                            <td>
+                                                <t t-esc=" order['cash'][0]"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc=" order['cash'][1]"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lay BY Sale</td>
+                                            <td>
+                                                <t t-esc=" order['lay_by'][0]"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc=" order['lay_by'][1]"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hire Purchase Sale</td>
+                                            <td>
+                                                <t t-esc=" order['hp'][0]"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc=" order['hp'][1]"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="page-break-after:always"></div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <report
+                id="session_cash_control"
+                model="session.session"
+                string="Session Cash Control Report"
+                report_type="qweb-pdf"
+                name="session_reports.report_cash_control_report"
+                file="session_reports.report_cash_control_report"
+        />
+    </data>
+</odoo>
+

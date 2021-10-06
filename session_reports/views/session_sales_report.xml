@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="sale_report_main_menu" name="Sales Reporting" parent="session_reports.report_main_menu"
+                  sequence="20"/>
+
+        <record id="session_report_sale_orders_action" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="domain">[('sale_type','!=','hire_purchase')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+        <menuitem id="session_report_sale_orders"
+                  name="Sale Orders"
+                  parent="session_reports.sale_report_main_menu"
+                  action="session_report_sale_orders_action"
+                  sequence="20"/>
+
+        <record id="session_report_sale_orders_lines_action" model="ir.actions.act_window">
+            <field name="name">Sales Transactions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+<!--            <field name="domain">[("order_id.sale_type","!=","hire_purchase")]</field>-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="session_report_sale_orders_lines"
+                  name="Sales Transactions"
+                  parent="session_reports.sale_report_main_menu"
+                  action="session_report_sale_orders_lines_action"
+                  sequence="21"/>
+
+        <record id="session_report_sale_analysis_action" model="ir.actions.act_window">
+            <field name="name">Sales Analysis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.report</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="session_report_sale_analysis"
+                  name="Sale Analysis"
+                  parent="session_reports.sale_report_main_menu"
+                  action="session_report_sale_analysis_action"
+                  sequence="22"/>
+
+    </data>
+</odoo>

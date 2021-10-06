@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ir_cron_close_daily_session" model="ir.cron">
+            <field name="name">Sessions: Close Daily session</field>
+            <field name="model_id" ref="session_reports.model_session_session"/>
+            <field name="state">code</field>
+            <field name="code">model.close_daily_session()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

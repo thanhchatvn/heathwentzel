@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_session_session_user,access.session.session.user,model_session_session,session_reports.group_session_user,1,1,1,0
+access_session_session_manager,access.session.session.manager,model_session_session,session_reports.group_session_manager,1,1,1,1
+access_session_session_admin,access.session.session.admin,model_session_session,session_reports.group_session_admin,1,1,1,1
+access_session_cash_pickups_user,access.session.cash.pickups.user,model_session_cash_pickups,session_reports.group_session_user,1,0,0,0
+access_session_cash_pickups_manager,access.session.cash.pickups.manager,model_session_cash_pickups,session_reports.group_session_manager,1,1,1,1
+access_session_cash_pickups_admin,access.session.cash.pickups.admin,model_session_cash_pickups,session_reports.group_session_admin,1,1,1,1
+access_session_day_end,access_session_day_end,model_session_day_end,base.group_user,1,1,1,0
+

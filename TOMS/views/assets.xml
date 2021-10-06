@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_backend_roster" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css"
+                  href="/TOMS/static/src/css/scheduler.css"/>
+            <link rel="stylesheet" type="text/css"
+                  href="/TOMS/static/src/css/fullcalendar.css"/>
+            <link rel="stylesheet" type="text/css"
+                  href="/TOMS/static/src/css/bootstrap-colorpicker.min.css"/>
+            <link rel="stylesheet" type="text/css"
+                  href="/TOMS/static/src/css/bootstrap-datepicker.css"/>
+            <link rel="stylesheet" type="text/css"
+                  href="/TOMS/static/src/css/spectrum.css"/>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.11/moment-timezone-with-data.js"></script>
+            <script type="text/javascript" src="/TOMS/static/src/js/fullcalendars.js"/>
+            <script type="text/javascript" src="/TOMS/static/src/js/scheduler.js"/>
+            <script type="text/javascript" src="/TOMS/static/src/js/resource_view.js"/>
+            <script type="text/javascript" src="/TOMS/static/src/js/kanban_image.js"/>
+            <script type="text/javascript" src="/TOMS/static/src/js/bootstrap-colorpicker.js"/>
+            <script type="text/javascript" src="/TOMS/static/src/js/spectrum.js"/>
+            <script type="text/javascript" src="/TOMS/static/src/js/color_picker.js"/>
+        </xpath>
+    </template>
+</odoo>

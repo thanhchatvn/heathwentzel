@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_bnk_stmt_cashbox_footer_inherit" model="ir.ui.view">
+            <field name="name">view.account.bnk.stmt.cashbox.footer.inherit</field>
+            <field name="model">account.bank.statement.cashbox</field>
+            <field name="inherit_id" ref="account.view_account_bnk_stmt_cashbox"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//footer" position="before">
+                    <group invisible="context.get('hide_actual_fields',1)">
+                        <group>
+                            <field name="actual_eft"/>
+                            <field name="actual_voucher"/>
+                            <field name="actual_credit"/>
+                            <field name="actual_inter_comp"/>
+                        </group>
+                        <group>
+                            <field name="actual_debit"/>
+                            <field name="actual_loyalty"/>
+                            <field name="actual_nupay"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//form//footer" position="replace">
+                    <footer>
+                        <button string="Confirm" class="btn-primary" type="object" name="save_cashbox_line"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+<!-- <record id="view_account_bnk_stmt_cashbox" model="ir.ui.view">
+            <field name="name">account.bnk_stmt_cashbox.form</field>
+            <field name="model">account.bank.statement.cashbox</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="cashbox_lines_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="coin_value"/>
+                                <field name="number"/>
+                                <field name="subtotal" sum="Total"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button string="Confirm" name="validate" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record> -->

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- This Menu Item Must have a parent -->
+
+
+    <record id="humint_product_pricelist_item_inherit" model="ir.ui.view">
+        <field name="name">pricelist.item.view.inherit</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="pricelist_id"/>
+                <field name="company_id"/>
+                <field name="saoa_code_only"/>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="humint_product_pricelist_item_search" model="ir.ui.view">
+       <field name="name">product.pricelist.item.search</field>
+       <field name="model">product.pricelist.item</field>
+        <field name="arch" type="xml">
+            <search string="pricelist_item_search">
+                <field name="pricelist_id"/>
+                <field name="name"/>
+                <field name="saoa_code"/>
+            </search>
+       </field>
+    </record>
+
+    <record id="product_pricelist_item_action" model="ir.actions.act_window">
+        <field name="name">pricelist.item.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.pricelist.item</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="product_pricelist_item_menu" name="Pricelist Items" parent="sale.product_menu_catalog"
+              action="product_pricelist_item_action" groups="product.group_sale_pricelist" sequence="15"/>
+
+</odoo>

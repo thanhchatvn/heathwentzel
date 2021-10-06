@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="0">
+
+	    <record model="ir.sequence" id="seq_session_id">
+		    <field name="name">Session Number</field>
+		    <field name="code">session.number</field>
+		    <field name="padding">4</field>
+		    <field name="company_id" eval="False"/>
+	    </record>
+    </data>
+</odoo>

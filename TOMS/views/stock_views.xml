@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="stock_inventory_view_form_inherit_toml" model="ir.ui.view">
+        <field name="name">stock.inventory.form.inherit.toml</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='location_id']" position="before">
+                <field name="stock_take_id" attrs="{}" required="1"/>
+                <field name="parent_inventory_id" readonly="1"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="load_all_products" type="object" string="Load All Products" class="oe_highlight"
+                        attrs="{'invisible':['|',('filter','!=','partial'),('state','!=','confirm')]}"/>
+                <button name="run_comparison" type="object" string="Run Comparison" class="oe_highlight"
+                        attrs="{'invisible':['|',('filter','!=','partial'),('state','!=','confirm')]}"/>
+            </xpath>
+            <button name="action_validate" position="after">
+                <button name="action_spliting_custom" type="object" string="Split Adjustments" class="oe_highlight"
+                        />
+            </button>
+            <button name="action_validate" position="attributes">
+                <attribute name="name">action_validate_custom</attribute>
+            </button>
+            <xpath expr="//notebook" position="inside">
+                <page string="All Products" attrs="{'invisible':[('filter','!=','partial')]}">
+                    <button name="view_list_of_products" string="⇒ View List Of All Products." type="object"
+                            class="oe_link oe_right" groups="stock.group_stock_user"/>
+                    <field name="all_product_ids" readonly="1">
+                        <tree string="Inventory All Products Details" editable="bottom"
+                              decoration-info="product_qty != theoretical_qty"
+                              decoration-danger="theoretical_qty &lt; 0">
+                            <field name="product_tracking" invisible="1"/>
+                            <field name="product_id" domain="[('type','=','product')]"
+                                   attrs="{'readonly': [('parent.filter', '=', 'product')]}" force_save="1"/>
+                            <field name="product_uom_id" string="UoM" groups="uom.group_uom"
+                                   domain="[('category_id', '=', product_uom_category_id)]"/>
+                            <field name="product_uom_category_id" invisible="1"/>
+                            <field name="location_id" domain="[('id', 'child_of', parent.location_id)]"
+                                   groups="stock.group_stock_multi_locations"/>
+                            <field name="prod_lot_id" domain="[('product_id', '=', product_id)]"
+                                   attrs="{'readonly': [('product_tracking', '=', 'none')]}"
+                                   context="{'default_product_id': product_id}" groups="stock.group_production_lot"/>
+                            <field name="package_id"
+                                   domain="['|', ('location_id','=', False), ('location_id', '=', location_id)]"
+                                   groups="stock.group_tracking_lot"/>
+                            <field name="partner_id" groups="stock.group_tracking_owner"/>
+                            <field name="theoretical_qty" readonly="1"/>
+                            <field name="product_qty" string="Real Quantity"/>
+                            <field name="state" invisible="True"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <button name="action_inventory_line_tree" position="replace">
+                 <button name="action_inventory_line_tree" class="oe_stat_button" icon="fa-building-o" type="object" help="List view of lines" states="confirm">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_text">Details</span>
+                        </div>
+                    </button>
+            </button>
+            <button name="action_reset_product_qty" position="replace">
+                <button name="action_reset_product_qty" states="confirm" string="⇒ Set quantities to 0" type="object" class="oe_link oe_right" groups="base.group_no_one"/>
+            </button>
+
+        </field>
+    </record>
+
+    <!-- Inherit search View of stock inventory lines -->
+    <record id="stock_inventory_line_view_search_inherit_toml" model="ir.ui.view">
+        <field name="name">stock.inventory.line.search.inherit.toml</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="Missing Stock" name="missing_stock" domain="[('is_new_missing_stock','=',True)]"/>
+                <filter string="Over Stock" name="over_stock" domain="[('is_over_stock','=',True)]"/>
+                <filter string="Matching Stock" name="matching_stock" domain="[('is_different_stock','=',False)]"/>
+                <filter string="Stock With Differences" name="different_stock"
+                        domain="[('is_different_stock','=',True)]"/>
+                <filter string="Category" name="category" context="{'group_by':'product_categ_id'}"/>
+                <filter string="Parent Location" name="parent_location" context="{'group_by':'parent_location_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="HUMINT_product_template_search_stock_form" model="ir.ui.view">
+        <field name="name">product.template.search.stock.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_search_form_view_stock"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="barcode"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+    <record id="stock_tree_form_view" model="ir.ui.view">
+        <field name="name">stock.take.form</field>
+        <field name="model">stock.take</field>
+        <field name="arch" type="xml">
+            <form name="stock_take_form" string="Stock Take Form">
+                <header>
+                    <button name="start_stock_take" states="draft"
+                            string="Start Stock Take" type="object" class="btn-primary"/>
+                    <button name="validate_stock_take"
+                            attrs="{'invisible':[('state','in',['draft','validated','cancelled'])]}"
+                            string="Validate" type="object" class="btn-primary"/>
+                    <button name="cancel_stock_take" string="Cancel" states="in_progress" type="object"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,validated,cancelled"/>
+                </header>
+                <sheet string="Stock Take Form Sheet">
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <group name="studio_group_801a3b">
+                        <group name="studio_group_801a3b_left">
+                            <field name="note" string="Note" invisible="1"/>
+
+                        </group>
+                        <group name="studio_group_801a3b_right">
+                            <field name="stock_inventory_ids" invisible="1"/>
+
+                        </group>
+                    </group>
+                    <group colspan="10">
+                        <field name="stock_inventory_ids"/>
+                        <field name="note" string="Note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="humint_view_inventory_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.tree.view</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="before">
+                <field name="location_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="stock_tree_tree_view" model="ir.ui.view">
+        <field name="name">stock.take.tree</field>
+        <field name="model">stock.take</field>
+        <field name="arch" type="xml">
+            <tree name="stock_take_tree" string="Stock Take tree">
+                <field name="name"/>
+                <field name="note"/>
+                <field name="stock_inventory_ids"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="toms_view_stock_inventory_line_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree.view</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="product_categ_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='product_qty']" position="after">
+                <field name="total_value"/>
+                <field name="value" readonly="0"/>
+                <field name="variance"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="stock_res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.aces</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='stock']" position="inside">
+                <div id="auto_transfer">
+                    <h2>Inventory Lines Limit</h2>
+                </div>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="auto_transfer_invoice" widget="upgrade_boolean"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <label for="stock_inventory_lines_limit"/>-->
+<!--                            <div class="text-muted">-->
+<!--                                When Inventory of is "All products" then please set the limit here-->
+<!--                            </div>-->
+<!--                            <div class="content-group">-->
+<!--                                <div id="stock_inventory_lines_limit"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="o_setting_right_pane">
+                            <label for="stock_inventory_lines_limit"/>
+                            <div class="text-muted">
+                                When Inventory of is "All products" then please set the limit here
+                            </div>
+                            <div class="content-group">
+                                <div id="stock_inventory_lines_limit"/>
+                            </div>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <field name="stock_inventory_lines_limit" />
+                        </div>
+<!--                        <div class="o_setting_left_pane" attrs="{'invisible': [('auto_transfer_invoice','=',False)]}">-->
+<!--                            <field name="auto_validate_transfer_from_invoice" />-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane" attrs="{'invisible': [('auto_transfer_invoice','=',False)]}">-->
+<!--                            <label for="auto_validate_transfer_from_invoice"/>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="action_stock_take" model="ir.actions.act_window">
+        <field name="name">Stock Take</field>
+        <field name="res_model">stock.take</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_action_stock_take" sequence="4"
+              name="Stock Take"
+              action="action_stock_take"
+              parent="stock.menu_stock_warehouse_mgmt"/>
+
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="humint_stock_root" name="Stock Take" web_icon="TOMS,static/description/stocktake.jpg" sequence="3"/>
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="humint_stock_root_categ" name="Stock Take" parent="humint_stock_root" sequence="2"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="humint_stock_root_action" name="" parent="humint_stock_root_categ" action="action_stock_take"
+              sequence="3"/>
+</odoo>

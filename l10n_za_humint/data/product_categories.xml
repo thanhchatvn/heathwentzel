@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+
+        <!-- Change existing Categries       -->
+        <record id="product.product_category_1" model="product.category">
+            <field name="parent_id"></field>
+            <field name="name">Frames</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500010"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600010"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100010"/>
+        </record>
+        <record id="product.cat_expense" model="product.category">
+            <field name="parent_id"></field>
+            <field name="name">Sunglasses</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500020"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600020"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100020"/>
+        </record>
+
+        <!-- New Product Categries       -->
+        <record id="product_category_2" model="product.category">
+            <field name="name">Lenses</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500030"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600030"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100030"/>
+
+        </record>
+        <record id="product_category_3" model="product.category">
+            <field name="name">Contact Lenses</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500040"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600040"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100040"/>
+
+        </record>
+        <record id="product_category_4" model="product.category">
+            <field name="name">Accessories</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500050"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600050"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100050"/>
+
+        </record>
+        <record id="product_category_5" model="product.category">
+            <field name="name">AddOns</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500060"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600060"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100060"/>
+
+        </record>
+        <record id="product_category_6" model="product.category">
+            <field name="name">Spares</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500070"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600070"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100070"/>
+
+        </record>
+        <record id="product_category_7" model="product.category">
+            <field name="name">Other</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500080"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600080"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100080"/>
+
+        </record>
+        <record id="product_category_8" model="product.category">
+            <field name="name">Prosthetics</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500100"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600100"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100100"/>
+
+        </record>
+        <record id="product_category_9" model="product.category">
+            <field name="name">Low Vision</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500110"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600110"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100110"/>
+
+        </record>
+        <record id="product_category_10" model="product.category">
+            <field name="name">Package Options</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500120"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600120"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+            <field name="property_stock_valuation_account_id" ref="l10n_za_humint_sub.1_100120"/>
+
+        </record>
+        <record id="product_category_11" model="product.category">
+            <field name="name">Fees</field>
+            <field name="property_cost_method">average</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_account_income_categ_id" ref="l10n_za_humint_sub.1_500090"/>
+            <field name="property_account_expense_categ_id" ref="l10n_za_humint_sub.1_600090"/>
+            <field name="property_stock_account_input_categ_id" ref="l10n_za_humint_sub.1_200000"/>
+            <field name="property_stock_account_output_categ_id" ref="l10n_za_humint_sub.1_100000"/>
+        </record>
+
+    </data>
+</odoo>

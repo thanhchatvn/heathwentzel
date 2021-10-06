@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="account_reports_za_statements_menu" parent="account.account_report_folder"/>
+        <record id="tag_ST1" model="account.account.tag">
+            <field name="name">ST1</field>
+        </record>
+
+        <record id="tag_ST1A" model="account.account.tag">
+            <field name="name">ST1A</field>
+        </record>
+
+        <record id="tag_ST2" model="account.account.tag">
+            <field name="name">ST2</field>
+        </record>
+
+        <record id="tag_ST2A" model="account.account.tag">
+            <field name="name">ST2A</field>
+        </record>
+
+
+        <record id="tag_ST3" model="account.account.tag">
+            <field name="name">ST3</field>
+        </record>
+
+        <record id="tag_ST3A" model="account.account.tag">
+            <field name="name">ST3A</field>
+        </record>
+
+        <record id="tag_ST5" model="account.account.tag">
+            <field name="name">ST5</field>
+        </record>
+
+        <record id="tag_ST5A" model="account.account.tag">
+            <field name="name">ST5A</field>
+        </record>
+        <record id="tag_ST7" model="account.account.tag">
+            <field name="name">ST7</field>
+        </record>
+
+        <record id="tag_ST7A" model="account.account.tag">
+            <field name="name">ST7A</field>
+        </record>
+        <record id="tag_ST10" model="account.account.tag">
+            <field name="name">ST10</field>
+        </record>
+
+        <record id="tag_ST10A" model="account.account.tag">
+            <field name="name">ST10A</field>
+        </record>
+
+        <record id="tag_ST12" model="account.account.tag">
+            <field name="name">ST12</field>
+        </record>
+
+        <record id="tag_ST12A" model="account.account.tag">
+            <field name="name">ST12A</field>
+        </record>
+
+        <record id="tag_PT14" model="account.account.tag">
+            <field name="name">PT14</field>
+        </record>
+
+        <record id="tag_PT14A" model="account.account.tag">
+            <field name="name">PT14A</field>
+        </record>
+
+        <record id="tag_PT15" model="account.account.tag">
+            <field name="name">PT15</field>
+        </record>
+
+        <record id="tag_PT15A" model="account.account.tag">
+            <field name="name">PT15A</field>
+        </record>
+
+        <record id="tag_PT16" model="account.account.tag">
+            <field name="name">PT16</field>
+        </record>
+
+        <record id="tag_PT16A" model="account.account.tag">
+            <field name="name">PT16A</field>
+        </record>
+        <record id="tag_PT17" model="account.account.tag">
+            <field name="name">PT17</field>
+        </record>
+
+        <record id="tag_PT17A" model="account.account.tag">
+            <field name="name">PT17A</field>
+        </record>
+
+        <record id="tag_PT18" model="account.account.tag">
+            <field name="name">PT18</field>
+        </record>
+
+        <record id="tag_PT18A" model="account.account.tag">
+            <field name="name">PT18A</field>
+        </record>
+
+        <record model="account.account.template" id="transfer_account_id">
+            <field name="name">Transfer account</field>
+            <field name="code">6565</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="za_chart_template_standard" model="account.chart.template">
+            <field name="name">South Africa Chart of Accounts - Standard</field>
+            <field name="code_digits">6</field>
+            <field name="bank_account_code_prefix">101</field>
+            <field name="transfer_account_code_prefix">1008</field>
+            <field name="cash_account_code_prefix">1001</field>
+            <field name="currency_id" ref="base.ZAR"/>
+            <!--<field name="transfer_account_id" ref="transfer_account_id"/>-->
+            <field name="complete_tax_set" eval="False"/>
+        </record>
+
+        <!--<record id="indian_chart_template_standard" model="account.chart.template">-->
+        <!--<field name="name">Indian Chart of Accounts - Standard</field>-->
+        <!--<field name="bank_account_code_prefix">1002</field>-->
+        <!--<field name="cash_account_code_prefix">1001</field>-->
+        <!--<field name="transfer_account_code_prefix">1008</field>-->
+        <!--<field name="code_digits">6</field>-->
+        <!--<field name="currency_id" ref="base.INR"/>-->
+        <!--</record>-->
+
+        <!--<record model="account.account.template" id="transfer_account_id">-->
+        <!--<field name="chart_template_id" ref="za_chart_template_standard"/>-->
+        <!--</record>-->
+
+        <record model="account.account.template" id="za_account_401100">
+            <field name="name">Sales Account</field>
+            <field name="code">401100</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_422102">
+            <field name="name">Gain On Difference Of Exchange</field>
+            <field name="code">422102</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_5011">
+            <field name="name">Cost of Goods Sold in Trading</field>
+            <field name="code">5011</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_531102">
+            <field name="name">Loss on Difference on Exchange</field>
+            <field name="code">531102</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Stock input output account -->
+
+        <record id="stock_input_account_101120" model="account.account.template">
+            <field name="code">101120</field>
+            <field name="name">Stock Interim Account (Received)</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record id="stock_output_account_101130" model="account.account.template">
+            <field name="code">101130</field>
+            <field name="name">Stock Interim Account (Delivered)</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record id="stock_valuation_account_101110" model="account.account.template">
+            <field name="code">101110</field>
+            <field name="name">Stock Valuation Account</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Income -->
+
+        <record model="account.account.template" id="za_account_100">
+            <field name="name">Sales - Frames</field>
+            <field name="code">102000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_101">
+            <field name="name">Sales - Sunglasses</field>
+            <field name="code">102010</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_102">
+            <field name="name">Sales - Spectacle lenses</field>
+            <field name="code">102020</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_103">
+            <field name="name">Sales - Contact lenses</field>
+            <field name="code">102030</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_104">
+            <field name="name">Sales - Accesories</field>
+            <field name="code">102040</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_105">
+            <field name="name">Sales - Add ons</field>
+            <field name="code">102050</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_106">
+            <field name="name">Sales - Spares</field>
+            <field name="code">102060</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_107">
+            <field name="name">Sales - Other</field>
+            <field name="code">102070</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_108">
+            <field name="name">Sales - Fees</field>
+            <field name="code">102080</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_109">
+            <field name="name">Sales - Prosthetics</field>
+            <field name="code">102090</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_110">
+            <field name="name">Sales - Low Vision</field>
+            <field name="code">102100</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_111">
+            <field name="name">Sales - Package Options</field>
+            <field name="code">102110</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Other Income -->
+
+        <record model="account.account.template" id="za_account_150">
+            <field name="name">Interest Received</field>
+            <field name="code">150</field>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_151">
+            <field name="name">Other Income</field>
+            <field name="code">151</field>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_152">
+            <field name="name">Profit On Sale Of Asset</field>
+            <field name="code">152</field>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Cost of Revenue -->
+
+        <record model="account.account.template" id="za_account_200">
+            <field name="name">Cost of Sales - Frames</field>
+            <field name="code">202000</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_201">
+            <field name="name">Cost of Sales - Sunglasses</field>
+            <field name="code">202010</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_202">
+            <field name="name">Cost of Sales - Spectacle lenses</field>
+            <field name="code">202020</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_203">
+            <field name="name">Cost of Sales - Contact lenses</field>
+            <field name="code">202030</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_204">
+            <field name="name">Cost of Sales - Accesories</field>
+            <field name="code">202040</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_205">
+            <field name="name">Cost of Sales - Add ons</field>
+            <field name="code">202050</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_206">
+            <field name="name">Cost of Sales - Spares</field>
+            <field name="code">202060</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_207">
+            <field name="name">Cost of Sales - Other</field>
+            <field name="code">202070</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_208">
+            <field name="name">Cost of Sales - Fees</field>
+            <field name="code">202080</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_209">
+            <field name="name">Cost of Sales - Prosthetics</field>
+            <field name="code">202090</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_210">
+            <field name="name">Cost of Sales - Low Vision</field>
+            <field name="code">202100</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_211">
+            <field name="name">Cost of Sales - Package Options</field>
+            <field name="code">202110</field>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Fixed Assets -->
+
+        <record model="account.account.template" id="za_account_300">
+            <field name="name">Computer Hardware @ Cost</field>
+            <field name="code">300000</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_301">
+            <field name="name">Computer Hardware - Accumulated Depreciation</field>
+            <field name="code">300010</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_302">
+            <field name="name">Computer Software @ Cost</field>
+            <field name="code">300020</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_303">
+            <field name="name">Computer Software - Accumulated Depreciation</field>
+            <field name="code">300030</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_304">
+            <field name="name">Furniture and Fittings @ Cost</field>
+            <field name="code">300040</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_305">
+            <field name="name">Furniture and Fittings - Accumulated Depreciation</field>
+            <field name="code">300050</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_306">
+            <field name="name">Optical Equipment @ Cost</field>
+            <field name="code">300060</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_307">
+            <field name="name">Optical Equipment - Accumulated Depreciation</field>
+            <field name="code">300070</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_308">
+            <field name="name">Signage @ Cost</field>
+            <field name="code">300080</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_309">
+            <field name="name">Signage - Accumulared Dereciation</field>
+            <field name="code">300090</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Current Assets -->
+
+        <record model="account.account.template" id="za_account_320">
+            <field name="name">Inventory - Frames</field>
+            <field name="code">320000</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_321">
+            <field name="name">Inventory - Sunglasses</field>
+            <field name="code">320010</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_322">
+            <field name="name">Inventory - Spectacle Lenses</field>
+            <field name="code">320020</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_323">
+            <field name="name">Inventory - Contact lenses</field>
+            <field name="code">320030</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_324">
+            <field name="name">Inventory - Accesories</field>
+            <field name="code">320040</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_325">
+            <field name="name">Inventory - Add ons</field>
+            <field name="code">320050</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_326">
+            <field name="name">Inventory - Spares</field>
+            <field name="code">320060</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_327">
+            <field name="name">Inventory - Other</field>
+            <field name="code">320070</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_328">
+            <field name="name">Inventory - Prosthetics</field>
+            <field name="code">320090</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_329">
+            <field name="name">Inventory - Low Vision</field>
+            <field name="code">320100</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_330">
+            <field name="name">Inventory - Package Options</field>
+            <field name="code">320110</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_357">
+            <field name="name">Floats</field>
+            <field name="code">357</field>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Recievible -->
+
+        <record model="account.account.template" id="za_account_342">
+            <field name="name">Receivable</field>
+            <field name="code">342</field>
+            <field name="user_type_id" ref="account.data_account_type_receivable"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Bank and Cash -->
+
+        <record model="account.account.template" id="za_account_350">
+            <field name="name">Bank</field>
+            <field name="code">350</field>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_354">
+            <field name="name">Petty Cash</field>
+            <field name="code">354</field>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="reconcile" eval="False"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Payble -->
+
+        <record model="account.account.template" id="za_account_353">
+            <field name="name">Accounts Payable</field>
+            <field name="code">353</field>
+            <field name="user_type_id" ref="account.data_account_type_payable"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Expense -->
+
+        <record model="account.account.template" id="za_account_400">
+            <field name="name">Advertising / Marketing</field>
+            <field name="code">400</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_405">
+            <field name="name">Alarm &amp; Security</field>
+            <field name="code">405</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_410">
+            <field name="name">Bad Debt</field>
+            <field name="code">410</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_415">
+            <field name="name">Bank charges</field>
+            <field name="code">415</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_420">
+            <field name="name">Computer expenses</field>
+            <field name="code">420</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_425">
+            <field name="name">Consumables</field>
+            <field name="code">425</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_430">
+            <field name="name">Courier &amp; Postage</field>
+            <field name="code">430</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_435">
+            <field name="name">Donations</field>
+            <field name="code">435</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_440">
+            <field name="name">Electricity and Water</field>
+            <field name="code">440</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_445">
+            <field name="name">Entertainment</field>
+            <field name="code">445</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_450">
+            <field name="name">FA Accumulated Deprecistion - Sinage</field>
+            <field name="code">450</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_460">
+            <field name="name">Depreciation - Computer Hardware</field>
+            <field name="code">460000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_465">
+            <field name="name">Depreciation - Computer Software</field>
+            <field name="code">460010</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_470">
+            <field name="name">Depreciation - Furniture and Fittings</field>
+            <field name="code">460020</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_475">
+            <field name="name">Depreciation - Optical Equipment</field>
+            <field name="code">460030</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_476">
+            <field name="name">Accumulated Deprecistion - Sinage</field>
+            <field name="code">460040</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_480">
+            <field name="name">Insurance</field>
+            <field name="code">480</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_485">
+            <field name="name">Interest paid</field>
+            <field name="code">485</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_490">
+            <field name="name">Motor &amp; Travel</field>
+            <field name="code">490</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_495">
+            <field name="name">Other Expence</field>
+            <field name="code">495</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_500">
+            <field name="name">Periodicals &amp; magazines</field>
+            <field name="code">500</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_505">
+            <field name="name">Printing &amp; Stationary</field>
+            <field name="code">505</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_510">
+            <field name="name">Rates and Taxes</field>
+            <field name="code">510</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_515">
+            <field name="name">Rent</field>
+            <field name="code">515</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_520">
+            <field name="name">Repairs and Maintenance</field>
+            <field name="code">520</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_525">
+            <field name="name">Salaries</field>
+            <field name="code">525</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_530">
+            <field name="name">Staff Refreshments</field>
+            <field name="code">530</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_535">
+            <field name="name">Stock impairment</field>
+            <field name="code">535</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_540">
+            <field name="name">Subscriptions</field>
+            <field name="code">540</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_545">
+            <field name="name">Telephone &amp; Faxes</field>
+            <field name="code">545</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!-- Equity -->
+
+        <record model="account.account.template" id="za_account_600">
+            <field name="name">Share capital</field>
+            <field name="code">600</field>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_601">
+            <field name="name">Retained Earnings</field>
+            <field name="code">601</field>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <!--  current liabilities    -->
+
+        <record model="account.account.template" id="za_account_820">
+            <field name="name">TAX B/S Current Tax</field>
+            <field name="code">820</field>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_825">
+            <field name="name">VAT Control</field>
+            <field name="code">825</field>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_830">
+            <field name="name">PROVISION FOR RENT</field>
+            <field name="code">830</field>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record model="account.account.template" id="za_account_835">
+            <field name="name">Accruals</field>
+            <field name="code">835</field>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="reconcile" eval="True"/>
+            <field name="chart_template_id" ref="za_chart_template_standard"/>
+        </record>
+
+        <record id="za_chart_template_standard" model="account.chart.template">
+            <field name="property_account_receivable_id" ref="za_account_342"/>
+            <field name="property_account_payable_id" ref="za_account_353"/>
+            <field name="property_account_expense_categ_id" ref="za_account_5011"/>
+            <field name="property_account_income_categ_id" ref="za_account_401100"/>
+            <field name="expense_currency_exchange_account_id" ref="za_account_531102"/>
+            <field name="income_currency_exchange_account_id" ref="za_account_422102"/>
+            <field name="property_stock_account_input_categ_id" ref="stock_input_account_101120"/>
+            <field name="property_stock_account_output_categ_id" ref="stock_output_account_101130"/>
+            <field name="property_stock_valuation_account_id" ref="stock_valuation_account_101110"/>
+        </record>
+
+    </data>
+</odoo>

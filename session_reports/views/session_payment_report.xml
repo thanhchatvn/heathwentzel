@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="payment_report_main_menu" name="Payments Reports" parent="session_reports.report_main_menu"
+                  sequence="30"/>
+
+        <record id="report_payment_analysis_action" model="ir.actions.act_window">
+            <field name="name">Payment Analysis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="domain">[("partner_type","=","customer")]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="report_payment_analysis"
+                  name="Payment Analysis"
+                  parent="session_reports.payment_report_main_menu"
+                  action="report_payment_analysis_action"
+                  sequence="26"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document" priority="90">
+
+        <xpath expr="/t/t/t/div/h2" position="before">
+            <div>
+                <h2 style="text-transform: uppercase;">
+                    <strong>
+                        <span t-if="o.stock_inter_order_id.id is False ">DELIVERY NOTE </span>
+                        <span t-if="o.stock_inter_order_id">STOCK TRANSFER NOTE</span>
+                    </strong>
+                </h2>
+            </div>
+        </xpath>
+        <xpath expr="/t/t/t/div/p" position="after">
+            <div style="position:absolute;top:800px; page-break-inside: avoid;">
+                <setFont name="Helvetica-Bold" size="7"/>
+                <strong>
+                    <drawString x="1.1cm" y="3.3cm">I CONFIRM THE ABOVE IS CORRECT.</drawString>
+                    <br/>
+                    <setFont name="Helvetica-Bold" size="7"/>
+                    <drawString x="1.1cm" y="2.7cm">RECIEVED BY..................................................</drawString>
+                    <br/>
+                    <drawString x="8.5cm" y="2.7cm">SIGNATURE....................................................</drawString>
+                    <br/>
+                    <drawString x="16.1cm" y="2.7cm">DATE........................................................</drawString>
+                    <br/>
+                    <span/>
+                    
+                     Printed By:<span t-field="user.name"/>
+                   
+                      <br/>
+                       Print Time :<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                   
+                    <br/>
+                    <br/>
+                </strong>
+            </div>
+        </xpath>
+        <xpath expr="/t/t/t/div/h2" position="after">
+            <div class="row">
+                <div class="col-5">
+                    <span t-if="o.stock_inter_order_id">
+                        <strong >RECEIVING BRANCH</strong>
+                        <br/>
+                    </span>
+                    <span t-if="o.stock_inter_order_id" t-field="o.stock_inter_order_id.in_location.complete_name"/>
+                </div>
+                <div class="col-1"/>
+                <div class="col-1"/>
+                <div class="col-5">
+                    <span t-if="o.stock_inter_order_id">
+                        <strong>SUPPLYING BRANCH</strong>
+                        <br/>
+                    </span>
+                    <span t-if="o.stock_inter_order_id" t-field="o.stock_inter_order_id.out_location.complete_name"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="/t/t/t/div/table[1]/thead/tr/th[2]" position="after">
+            <th>
+                <span>Quantity Delivered</span>
+            </th>
+        </xpath>
+        <xpath expr="/t/t/t/div/table[1]/tbody/tr/td[2]" position="after">
+            <td>
+                <span t-field="move.quantity_done"/>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="report_picking_slip_report" inherit_id="stock.report_picking">
+        <!-- <xpath expr="/t/t/t/t/div/div[1]" position="before">
+            <div class="row">
+                <div class="col">
+                    <span t-field="o.picking_type_id.warehouse_id.store_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                </div>
+            </div>
+        </xpath> -->
+        <xpath expr="/t/t/t/t/div/p[1]" position="after">
+            <div class="row" style="position:absolute;top:800px; page-break-inside: avoid;">
+                <div class="col-6">
+                    <strong>
+                        <drawString x="1.1cm" y="3.3cm"/>
+                        <br/>
+                        <setFont name="Helvetica-Bold" size="5"/>
+                        <drawString x="1.1cm" y="2.7cm">PICKED BY:</drawString>
+                        <br/>
+                        <drawString x="1.1cm" y="2.7cm">NAME.........................................................</drawString>
+                        <br/>
+                        <drawString x="8.5cm" y="2.7cm">SIGNATURE..............................................</drawString>
+                        <br/>
+                        <drawString x="16.1cm" y="2.7cm">DATE........................................................</drawString>
+                    <br/>
+                    <span/>
+                    
+                     Printed By:<span t-field="user.name"/>
+                   
+                      <br/>
+                       Print Time :<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                   
+                    <br/>
+                    <br/>
+                </strong>
+                </div>
+                <!-- <div class="col-"/> -->
+                <div class="col-6">
+                    <strong>
+                        <drawString x="1.1cm" y="3.3cm"/>
+                        <br/>
+                        <setFont name="Helvetica-Bold" size="5"/>
+                        <drawString x="1.1cm" y="2.7cm">CHECKED BY:</drawString>
+                        <br/>
+                        <drawString x="1.1cm" y="2.7cm">NAME.........................................................</drawString>
+                        <br/>
+                        <drawString x="8.5cm" y="2.7cm">SIGNATURE..............................................</drawString>
+                        <br/>
+                        <drawString x="16.1cm" y="2.7cm">DATE...........................................................</drawString>
+                        <br/>
+                        <span/>
+                        <br/>
+                        <br/>
+                    </strong>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

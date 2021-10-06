@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="hp_report_main_menu" name="Hire Purchase" parent="session_reports.report_main_menu"
+                  sequence="10"/>
+
+        <record id="report_hp_account_analysis_action" model="ir.actions.act_window">
+            <field name="name">HP Account Analysis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.hp</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="report_hp_account_analysis"
+                  name="HP Account Analysis"
+                  parent="session_reports.hp_report_main_menu"
+                  action="report_hp_account_analysis_action"
+                  sequence="10"/>
+
+
+        <record id="report_hp_account_sales_analysis_action" model="ir.actions.act_window">
+            <field name="name">HP Account Sales Analysis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="domain">[('sale_type','=','hire_purchase')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="report_hp_account_sale_analysis"
+                  name="HP Account Sales Analysis"
+                  parent="session_reports.hp_report_main_menu"
+                  action="report_hp_account_sales_analysis_action"
+                  sequence="11"/>
+
+
+        <record id="report_hp_account_installment_analysis_action" model="ir.actions.act_window">
+            <field name="name">HP Account Installment Analysis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.hp.installment</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="report_hp_installment_analysis"
+                  name="HP Account Installment Analysis"
+                  parent="session_reports.hp_report_main_menu"
+                  action="report_hp_account_installment_analysis_action"
+                  sequence="12"/>
+
+        <record id="report_hp_payments_action" model="ir.actions.act_window">
+            <field name="name">HP Account Payments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="domain">[("hp_id","!=",False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="report_hp_payments"
+                  name="HP Account Payments"
+                  parent="session_reports.hp_report_main_menu"
+                  action="report_hp_payments_action"
+                  sequence="13"/>
+
+        <record id="report_hp_credit_journal_action" model="ir.actions.act_window">
+            <field name="name">HP Credit Journal</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hp.credit.journal</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="report_hp_credit_journal"
+                  name="HP Credit Journal"
+                  parent="session_reports.hp_report_main_menu"
+                  action="report_hp_credit_journal_action"
+                  sequence="14"/>
+
+        <record id="report_hp_debit_journal_action" model="ir.actions.act_window">
+            <field name="name">HP Debit Journal</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hp.debit.journal</field>
+            <field name="view_mode">tree,pivot,form,dashboard</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="report_hp_debit_journal"
+                  name="HP Debit Journal"
+                  parent="session_reports.hp_report_main_menu"
+                  action="report_hp_debit_journal_action"
+                  sequence="15"/>
+
+    </data>
+</odoo>

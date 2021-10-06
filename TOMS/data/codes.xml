@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="icd_category_1" model="icd.codes.category">
+            <field name="name">Examinations</field>
+        </record>
+        <record id="icd_category_2" model="icd.codes.category">
+            <field name="name">Vision</field>
+        </record>
+        <record id="icd_category_3" model="icd.codes.category">
+            <field name="name">Lids</field>
+        </record>
+        <record id="icd_category_4" model="icd.codes.category">
+            <field name="name">External</field>
+        </record>
+        <record id="icd_category_5" model="icd.codes.category">
+            <field name="name">Internal</field>
+        </record>
+        <record id="icd_category_6" model="icd.codes.category">
+            <field name="name">Other</field>
+        </record>
+    </data>
+</odoo>

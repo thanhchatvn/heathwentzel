@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <data>
+          <menuitem name="Job Track"
+            id="project.menu_main_pm" sequence="7"/>
+          <menuitem id="project.menu_projects" parent="project.menu_main_pm" name="Jobs"/>
+          <menuitem  id="project.menu_projects_config" parent="project.menu_project_config" name="Jobs" />
+        </data>
+
+</odoo>

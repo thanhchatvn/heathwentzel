@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.aces</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='stock']" position="inside">
+                    <div id="auto_transfer">
+                        <h2>Auto Transfer</h2>
+                    </div>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="auto_transfer_invoice" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="auto_transfer_invoice"/>
+                                <div class="text-muted">
+                                    Auto Create Transfer from Invoice
+                                </div>
+                                <div class="content-group">
+                                    <div id="auto_transfer_invoice"/>
+                                </div>
+                            </div>
+                            <div class="o_setting_right_pane" attrs="{'invisible': [('auto_transfer_invoice','=',False)]}">
+                                <label for="auto_transfer_invoice_allowed_companies"/>
+                                <div class="text-muted">
+                                    Allowed Companies for Invoice
+                                </div>
+                                <div class="content-group">
+                                    <div id="auto_transfer_invoice_allowed_companies"/>
+                                </div>
+                            </div>
+                            <div class="o_setting_right_pane" attrs="{'invisible': [('auto_transfer_invoice','=',False)]}">
+                                <field name="auto_transfer_invoice_allowed_companies" widget="many2many_tags"
+                                attrs="{'required':[('auto_transfer_invoice','=',True)]}"/>
+                            </div>
+                            <div class="o_setting_left_pane" attrs="{'invisible': [('auto_transfer_invoice','=',False)]}">
+                                <field name="auto_validate_transfer_from_invoice" />
+                            </div>
+                            <div class="o_setting_right_pane" attrs="{'invisible': [('auto_transfer_invoice','=',False)]}">
+                                <label for="auto_validate_transfer_from_invoice"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="auto_transfer_bill" widget="upgrade_boolean"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="auto_transfer_bill"/>
+                                <div class="text-muted">
+                                    Auto Create Transfer from Bill
+                                </div>
+                                <div class="content-group">
+                                    <div id="auto_transfer_bill"/>
+                                </div>
+                            </div>
+                            <div class="o_setting_right_pane" attrs="{'invisible': [('auto_transfer_bill','=',False)]}">
+                                <label for="auto_transfer_bill_allowed_companies"/>
+                                <div class="text-muted">
+                                    Allowed Companies for Bill
+                                </div>
+                                <div class="content-group">
+                                    <div id="auto_transfer_bill_allowed_companies"/>
+                                </div>
+                            </div>
+                            <div class="o_setting_right_pane" attrs="{'invisible': [('auto_transfer_bill','=',False)]}">
+                                <field name="auto_transfer_bill_allowed_companies" widget="many2many_tags"
+                                attrs="{'required':[('auto_transfer_bill','=',True)]}"/>
+                            </div>
+                        </div>
+                    </div>   
+            </xpath>
+        </field>
+    </record>
+</odoo>

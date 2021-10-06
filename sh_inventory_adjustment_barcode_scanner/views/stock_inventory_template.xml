@@ -1,0 +1,9 @@
+<odoo>
+	<data>
+ 	 	<template id="stock_inventory_assets_backend" name="sh_stock_inventory_barcode_assets" inherit_id="web.assets_backend">
+	    	<xpath expr="." position="inside">
+	        	<script type="text/javascript" src="/sh_inventory_adjustment_barcode_scanner/static/src/js/barcode_scanner_handler.js"/>
+	    	</xpath>
+		</template>	
+	</data>
+</odoo>

@@ -1,0 +1,72 @@
+<odoo>
+
+    <record id="tree_view_for_speacial_character" model="ir.ui.view">
+        <field name="name">Speacial Characters</field>
+        <field name="model">speacial.charcters</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"></field>
+                <field name="c_code"></field>
+                <field name="c_value"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_speacial_character_menu" model="ir.actions.act_window">
+            <field name="name">Speacial Characters</field>
+            <field name="res_model">speacial.charcters</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_switchon_navigator" model="ir.actions.act_window">
+            <field name="name">SwitchOn Navigator</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type','=','out_invoice'),('claim_level_mediswitch_status','!=',False)]</field>
+            <field name="context">{'type':'out_invoice', 'journal_type': 'sale'}</field>
+    </record>
+
+    <record id="invoice_tree_for_navigator" model="ir.ui.view">
+            <field name="name">account.invoice.tree</field>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" string="Invoice">
+                    <field name="partner_id" groups="base.group_user" invisible="1"/>
+                    <field name="first_name"></field>
+                    <field name="sur_name"></field>
+                    <field name="account_number"></field>
+                    <field name="date_invoice" string="Service Date"/>
+                    <field name="medical_scheme"/>
+                    <field name="amount_total_signed" string="Total" sum="Total"/>
+                    <field name="user_ref" string="SW Ref Number"/>
+                    <field name="claim_level_mediswitch_status" string="status"/>
+                    <field name="response_description" string="Response Message"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_invoice_treeview" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="invoice_tree_for_navigator"/>
+            <field name="act_window_id" ref="action_switchon_navigator"/>
+        </record>
+
+        <record id="action_invoice_tree1_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account.invoice_form"/>
+            <field name="act_window_id" ref="action_switchon_navigator"/>
+        </record>
+
+
+     <!-- This Menu Item Must have a parent -->
+    <menuitem id="menu_action_speacial_characters_submenu" name="Mediswitch Settings" parent="TOMS.clinical_menu_configuration" sequence="16"/>
+    <menuitem id="menu_action_speacial_characters" name="Special Characters" parent="menu_action_speacial_characters_submenu" action="mediswitch_integration.action_speacial_character_menu" sequence="1"/>
+
+    <menuitem id="sub_menu_switch_navigator" name="SwitchOn Navigator" parent="TOMS.clinical_menu_exam" sequence="4" action="mediswitch_integration.action_switchon_navigator"/>
+
+</odoo>

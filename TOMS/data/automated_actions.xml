@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.server" id="humint_Update_Refraction">
+            <field name="name">Update Refraction</field>
+            <field name="model_id" ref="TOMS.model_clinical_examination"/>
+            <field name="sequence">1</field>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">
+for records in records:
+    records.clinical_test_ids.write({'test_yes_no':True})
+            </field>
+
+        </record>
+
+    </data>
+</odoo>

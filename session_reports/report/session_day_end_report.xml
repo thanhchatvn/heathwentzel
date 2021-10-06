@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_day_end_report">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <span>
+                                <b>Report Name:</b>Day-End Cash-Up Report -Store
+
+
+                            </span>
+                            <table class="table table-sm o_main_table" style="border: 1px solid #dddddd;">
+                                <tr>
+                                    <td>
+                                        <strong>Printing User</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="user.name"/>
+                                    </td>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Session User/ ID </strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.id"/>
+                                    </td>
+                                    <td>
+                                        <strong>Session Store </strong>
+                                    </td>
+                                    <!-- <td>
+                                        <span t-field="doc.store_id"/>
+                                    </td> -->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Session Start</strong>
+                                    </td>
+                                    <td>
+                                        <!--<span t-field="doc.opening_date"/>-->
+                                    </td>
+                                    <td>
+                                        <strong>Session End </strong>
+                                    </td>
+                                    <td>
+                                        <!--<span t-field="doc.closing_date"/>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!--<strong>Start Date</strong>-->
+                                    </td>
+                                    <td>
+                                        <!--<span t-field="doc.approve_date"/>-->
+                                    </td>
+                                    <td>
+                                        <strong>Verified Sign :</strong>
+                                    </td>
+                                    <td>
+                                        <!--<t t-if="ending_date">-->
+                                        <span></span>
+                                        <!--</t>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Opening Cash Float</strong>
+                                    </td>
+                                    <td>
+                        R
+
+
+
+
+                                                                <!--<span t-field="doc.starting_cash"/>-->
+                                    </td>
+                                    <td>
+                                        <strong></strong>
+                                    </td>
+                                    <td>
+                                        <!--<span t-field="doc.total_installment"/>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong></strong>
+                                    </td>
+                                    <td>
+                                        <!--<span t-esc="'%.2f'%(doc.interest_rate)"/>-->
+                                    </td>
+                                    <td>
+                                        <strong></strong>
+                                    </td>
+                                    <td>
+                                        <!--<span t-field="doc.interest"/>-->
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <th>
+                                        <u>Tender Type</u>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+                                        <!--<u>Pick-Ups</u>-->
+                                    </th>
+                                    <th>
+                                        <u>Calculated Amt</u>
+                                    </th>
+                                    <th>
+                                        <u>Counted</u>
+                                    </th>
+                                    <th>
+                                        <u>Varience</u>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <td>
+                                            <span>
+                                                <b>CASH</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-- <t t-set="cal_pickup" t-value="(( line.transaction - line.expected_cash))"/><b>R</b><t t-esc="cal_pickup"/> -->
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.expected_cash"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_cash"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_cash"/>
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <!--<br/><br/>-->
+                                        <td>
+                                            <span>
+                                                <b>EFT</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <t t-set="cal_eft" t-value="(-(line.actual_eft + line.diff_eft))"/>
+                                            <b>R</b>
+                                            <span t-field="line.expected_eft"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_eft"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_eft"/>
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <!--<br/><br/>-->
+                                        <td>
+                                            <span>
+                                                <b>DEBIT CARD</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <t t-set="cal_debit" t-value="(-(line.actual_debit + line.diff_debit))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_debit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_debit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_debit"/>
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <!--<br/><br/>-->
+                                        <td>
+                                            <span>
+                                                <b>CREDIT CARD</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <t t-set="cal_credit" t-value="(-(line.actual_credit + line.diff_credit))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_credit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_credit"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_credit"/>
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <!--<br/><br/>-->
+                                        <td>
+                                            <span>
+                                                <b>NUPAY</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <t t-set="cal_nupay" t-value="(-(line.actual_nupay + line.diff_nupay))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_nupay"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_nupay"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_nupay"/>
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <!--<br/><br/>-->
+                                        <td>
+                                            <span>
+                                                <b>LOYALTY</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <t t-set="cal_loyalty" t-value="(-(line.actual_loyalty + line.diff_loyalty))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_loyalty"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_loyalty"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_loyalty"/>
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <!--<br/><br/>-->
+                                        <td>
+                                            <span>
+                                                <b>VOUCHER</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <t t-set="cal_voucher" t-value="(-(line.actual_voucher + line.diff_voucher))"/>
+                                            <b>R</b>
+                                            <t t-esc="cal_voucher"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.actual_voucher"/>
+                                        </td>
+                                        <td>
+                                            <b>R</b>
+                                            <span t-field="line.diff_voucher"/>
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <tr style="page-break-inside: avoid !important" t-foreach="doc" t-as="line">
+                                        <!--<br/><br/>-->
+                                        <td>
+                                            <span>
+                                                <b>TOTAL PAYMENTS</b>
+                                            </span>
+                                            <!--<span>CASH<span/>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <!-->>-->
+                                        </td>
+                                        <td>
+                                            <b>
+                                                <t t-set="cal_total" t-value="(
+                            -(line.actual_nupay + line.diff_nupay) +
+                            -(line.actual_voucher + line.diff_voucher) +
+                            -(line.actual_loyalty + line.diff_loyalty)+
+                            -(line.actual_credit + line.diff_credit)+
+                            -(line.actual_debit + line.diff_debit)+
+                            -(line.actual_eft + line.diff_eft))"/>
+                                                <u>
+                                                    <b>R</b>
+                                                    <t t-esc="cal_total"/>
+                                                </u>
+                                            </b>
+                                        </td>
+                                        <td>
+                                            <!--<b>R</b><span t-field="line.actual_voucher"/>-->
+                                        </td>
+                                        <td>
+                                            <!--<b>R</b><span t-field="line.diff_voucher"/>-->
+                                        </td>
+                                        <!--<td>-->
+                                        <!--    <t t-set="balance" t-value="balance + (line.credit_amnt - line.debit_amnt)"/>-->
+                                        <!--    <t t-esc="balance"/>-->
+                                        <!--</td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <span>
+                                <u>
+                                    <b>Cash Pickups:</b>
+                                </u>
+                            </span>
+                            <table class="table o_report_block_table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <span>Pickup Sequence #</span>
+                                        </th>
+                                        <th>
+                                            <span>Pickup ID </span>
+                                        </th>
+                                        <th>
+                                            <span>Date </span>
+                                        </th>
+                                        <th>
+                                            <span>Reason </span>
+                                        </th>
+                                        <th>
+                                            <span>Amount</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.cash_pickup_ids" t-as="table_line">
+                                        <td>
+                                            <span t-field="table_line.id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="table_line.id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="table_line.date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="table_line.reason"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="table_line.amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="position:absolute;top:750px; page-break-inside: avoid;">
+                            <span>
+                                <u>
+                                    <b>Document Totals included in this Cashup Report</b>
+                                </u>
+                            </span>
+                            <table class="text-center table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <u>
+                                                <b>   DOCUMENT TYPE</b>
+                                            </u>
+                                        </td>
+                                        <td>
+                                            <u>
+                                                <b>COUNT</b>
+                                            </u>
+                                            <!--<span t-field="doc.cash_sale_count"/>-->
+                                        </td>
+                                        <td>
+                                            <u>
+                                                <b>  VALUES</b>
+                                            </u>
+                                            <!--<span t-field="doc.cash_sale_total"/>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                   CASH SALES :
+
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.cash_sale_count"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.cash_sale_total"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                   ACCOUNT SALES
+
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.account_sale_count"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.account_sale_total"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                 HIRE PURCHASE
+
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.hp_sale_count"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.hp_sale_total"/>
+                                        </td>
+                                        <td>
+                                            <!--Due By:-->
+                                            <!--<t t-esc="doc.installment_id.filtered(lambda x:x.state == 'draft')[0].date"/>-->
+                                        </td>
+                                        <!--<td colspan="2">Initial term service fee and &amp; insurance:-->
+                                        <!--</td>-->
+                                    </tr>
+                                    <!--<tr>-->
+                                    <!--    <td>-->
+                                    <!--              PAYMNETS COUNT :-->
+                                    <!--        <span t-field="doc.payment_count"/>-->
+                                    <!--    </td>-->
+                                    <!--    <td>-->
+                                    <!--Due By:-->
+                                    <!--<t t-esc="doc.installment_id.filtered(lambda x:x.state == 'draft')[0].date"/>-->
+                                    <!--    </td>-->
+                                    <!--<td colspan="2">Initial term service fee and &amp; insurance:-->
+                                    <!--</td>-->
+                                    <!--</tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <report id="session_day_end" model="session.day.end" string="Session Day End Report" report_type="qweb-pdf" name="session_reports.report_day_end_report" file="session_reports.report_day_end_report" />
+    </data>
+</odoo>
+
